@@ -97,12 +97,42 @@ public class Main {
             }
             System.out.println(llistaPersones);
         }
+
+        /*/llistaPersones.forEach(persona -> {
+            if (!mapPersones.containsKey(persona.getAge()))
+                mapPersones.put(persona.getAge(),1);
+            else
+                mapPersones.put(persona.getAge(), mapPersones.get(persona.getAge()) + 1);
+        });/*/
+
+        llistaPersones.forEach(persona -> {
+            mapPersones.computeIfPresent(persona.getAge(),(k,v) -> v + 1);
+            mapPersones.putIfAbsent((persona.getAge()),1);
+        });
+
         //9 Fes un recorregut per imprimir clau i valor del map, amb foreach i una lambda o reference method.
+        mapPersones.forEach((k , v) -> {
+            System.out.println("Clau: " + k + " - Valor: " + v);
+        });
 
         //10 Treu un llistat de les persones DONA. Cal fer servir STREAM.
+        llistaPersones.stream().filter(persona -> persona.getGenere().equals(Persona.Genere.DONA)).forEach(System.out::println);
 
-        //11 Treu un llistat dels 2 HOMES més joves. Fer servir STREAM
+        //11 Crea un List amb els menors de 25 (stream)
+        llistaPersones.stream().filter(persona -> persona.getAge() < 25).forEach(System.out::println);
 
-        //12 Esborrar del llistat les persones entre 30 i 40 anys (removeIf)
+        //12 Llistat de Persones que tinguin una 'a' o 'A' al seu nom (stream)
+        llistaPersones.stream().filter(persona -> persona.getNom().toUpperCase().contains("A")).forEach(System.out::println);
+
+        //13 Treu un llistat dels 2 HOMES més joves. (stream)
+        llistaPersones.stream().filter(persona -> persona.getGenere().equals(Persona.Genere.HOME))
+                .sorted(Comparator.comparing(Persona::getAge))
+                .limit(2)
+                .forEach(System.out::println);
+
+        //14 Esborrar del llistat les persones entre 30 i 40 anys (removeIf)
+        llistaPersones.removeIf(persona -> persona.getAge() >= 30 && persona.getAge() <= 40);
+        System.out.println(llistaPersones);
+
     }
 }
