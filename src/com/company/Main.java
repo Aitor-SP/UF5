@@ -90,10 +90,10 @@ public class Main {
         //8 Crea un Map de Persona on la key és l'edat i el value és quantes perones hi ha amb aquesta edat. Esbrina com fer els puts al map usant aquests mètodes computeIfPresent i putIfAbsent
         Map<Integer, Integer> mapPersones = new HashMap<>();
         for (Persona persona : llistaPersones) {
-            if (!mapPersones.containsKey(persona.getAge())){
-                 mapPersones.put(persona.getAge(),1);
+            if (mapPersones.containsKey(persona.getAge())){
+                 mapPersones.putIfAbsent(persona.getAge(),1);
             } else {
-                mapPersones.put(persona.getAge(), mapPersones.get(persona.getAge()) + 1);
+                mapPersones.computeIfPresent();
             }
         }
         //9 Fes un recorregut per imprimir clau i valor del map, amb foreach i una lambda o reference method.
