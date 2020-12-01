@@ -93,7 +93,7 @@ public class Main {
             if (mapPersones.containsKey(persona.getAge())){
                  mapPersones.putIfAbsent(persona.getAge(),1);
             } else {
-                mapPersones.computeIfPresent();
+                mapPersones.computeIfPresent(persona.getAge(),(key, valor) -> persona.getAge()+1);
             }
         }
         //9 Fes un recorregut per imprimir clau i valor del map, amb foreach i una lambda o reference method.
