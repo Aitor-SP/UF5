@@ -134,5 +134,7 @@ public class Main {
         llistaPersones.removeIf(persona -> persona.getAge() >= 30 && persona.getAge() <= 40);
         System.out.println(llistaPersones);
 
+        //15 Sumar dos dias a todas las fechas de nacimiento a todos los de la lista
+        llistaPersones.stream().map(persona -> persona.getDataNaixament().plusDays(2)).forEach(System.out::println);
     }
 }
